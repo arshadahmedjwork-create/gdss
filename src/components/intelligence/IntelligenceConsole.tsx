@@ -30,10 +30,13 @@ const STEP_LOGS: Record<number, string[]> = {
   6: ["Compiling investigation summary...", "Generating digital footprint report...", "Report ready."],
 };
 
+import emailjs from "@emailjs/browser";
+
 const IntelligenceConsole = ({ subject, onClose }: Props) => {
   const [step, setStep] = useState<Step>(0);
   const [logs, setLogs] = useState<string[]>([]);
   const [scanProgress, setScanProgress] = useState(0);
+  const [emailSent, setEmailSent] = useState(false);
   const logEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -66,11 +69,13 @@ const IntelligenceConsole = ({ subject, onClose }: Props) => {
         }
       }
       await new Promise((r) => setTimeout(r, 600));
-      if (!cancelled) setStep((s) => (s + 1) as Step);
+      if (!cancelled) {
+        setStep((s) => (s + 1) as Step);
+      }
     })();
 
     return () => { cancelled = true; };
-  }, [step]);
+  }, [step, subject, emailSent]);
 
   const timestamp = () => new Date().toLocaleTimeString("en-GB", { hour12: false });
 
@@ -103,9 +108,9 @@ const IntelligenceConsole = ({ subject, onClose }: Props) => {
       </header>
 
       {/* Main panels */}
-      <div className="flex flex-1 flex-col overflow-hidden lg:flex-row">
+      <div className="flex flex-1 flex-col overflow-y-auto lg:overflow-hidden lg:flex-row">
         {/* LEFT – Subject Profile */}
-        <aside className="w-full border-b border-border lg:w-72 lg:border-b-0 lg:border-r overflow-y-auto">
+        <aside className="w-full shrink-0 border-b border-border lg:w-72 lg:border-b-0 lg:border-r lg:overflow-y-auto">
           <div className="p-4 sm:p-5">
             <p className="mb-4 text-[10px] font-semibold uppercase tracking-[0.15em] text-primary font-body">Subject Profile</p>
 
@@ -129,7 +134,7 @@ const IntelligenceConsole = ({ subject, onClose }: Props) => {
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-3 pt-3 border-t border-border">
                       <Meter label="Identity Confidence" value={87} color="primary" />
                       <Meter label="Digital Footprint" value={62} color="muted-foreground" />
-                      <Meter label="Risk Level" value={18} color="destructive" />
+                      <Meter label="Risk Level" value={98} color="destructive" />
                     </motion.div>
                   )}
                 </motion.div>
@@ -139,8 +144,8 @@ const IntelligenceConsole = ({ subject, onClose }: Props) => {
         </aside>
 
         {/* CENTER – Activity Feed */}
-        <main className="flex-1 flex flex-col min-w-0 overflow-hidden">
-          <div className="flex-1 overflow-y-auto p-4 sm:p-5 font-mono text-xs sm:text-sm">
+        <main className="flex flex-col min-w-0 flex-1 lg:overflow-hidden border-b border-border lg:border-b-0">
+          <div className="flex-1 p-4 sm:p-5 font-mono text-xs sm:text-sm lg:overflow-y-auto min-h-[300px] lg:min-h-0">
             <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.15em] text-primary font-body">
               Investigation Activity Feed
             </p>
@@ -169,20 +174,76 @@ const IntelligenceConsole = ({ subject, onClose }: Props) => {
             <div ref={logEndRef} />
           </div>
 
-          {/* CTA */}
+          {/* CTA / Report Delivery */}
+          {/* CTA / Report Delivery */}
           <AnimatePresence>
             {step >= 7 && (
-              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="border-t border-border p-4 sm:p-6 text-center">
-                <p className="mb-1 font-heading text-lg font-bold text-foreground">Need a full professional investigation?</p>
-                <p className="mb-4 text-sm text-muted-foreground">Our team of experts can conduct an in-depth authorized investigation.</p>
-                <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
-                  <a href="/inquiry" className="bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90">
-                    Start Confidential Investigation
-                  </a>
-                  <a href="/contact" className="border border-border px-6 py-3 text-sm font-medium text-foreground transition-all hover:bg-subtle">
-                    Book Private Consultation
-                  </a>
+              <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="border-t-4 border-destructive p-4 sm:p-6 md:p-8 bg-destructive/10 text-center shadow-[inset_0_0_20px_rgba(255,0,0,0.15)] backdrop-blur-sm">
+                <div className="mx-auto mb-3 sm:mb-4 flex h-10 w-10 sm:h-14 sm:w-14 items-center justify-center rounded-full bg-destructive/20 text-destructive">
+                   <Lock className="h-5 w-5 sm:h-7 sm:w-7" />
                 </div>
+                <h3 className="mb-2 font-heading text-lg sm:text-xl font-extrabold text-destructive md:text-2xl">
+                   CRITICAL ALERTS DETECTED
+                </h3>
+                <p className="mx-auto mb-4 sm:mb-6 max-w-lg text-xs sm:text-sm text-foreground/80 leading-relaxed font-semibold px-2">
+                   Our preliminary scan revealed hidden digital footprints, potential compliance risks, and unverified data points linked to this subject. To protect the integrity of your organization, you must uncover these hidden vectors immediately.
+                </p>
+                
+                {!emailSent ? (
+                  <form 
+                    onSubmit={async (e) => {
+                      e.preventDefault();
+                      const formData = new FormData(e.currentTarget);
+                      const userEmail = formData.get("userEmail") as string;
+                      if (!userEmail) return;
+
+                      try {
+                        const templateParams = {
+                          to_email: userEmail,
+                          subject_name: subject.name,
+                          subject_email: subject.email,
+                          subject_phone: subject.phone || "N/A",
+                          subject_location: subject.location || "N/A",
+                        };
+                        
+                        await emailjs.send(
+                          import.meta.env.VITE_EMAILJS_SERVICE_ID,
+                          import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+                          templateParams,
+                          { publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY }
+                        );
+                        setEmailSent(true);
+                      } catch (error) {
+                        console.error("Failed to send report via EmailJS", error);
+                      }
+                    }}
+                    className="mx-auto flex max-w-md w-full flex-col gap-2 sm:gap-3 sm:flex-row sm:items-center px-2"
+                  >
+                    <input 
+                      type="email" 
+                      name="userEmail"
+                      required 
+                      placeholder="Enter email to receive report" 
+                      className="w-full flex-1 rounded-none border border-destructive/50 bg-background/50 px-3 py-3 sm:px-4 sm:py-3.5 text-xs sm:text-sm text-foreground placeholder:text-muted-foreground outline-none focus:border-destructive focus:ring-1 focus:ring-destructive"
+                    />
+                    <button type="submit" className="w-full sm:w-auto bg-destructive px-4 py-3 sm:px-6 sm:py-3.5 text-xs sm:text-sm font-bold tracking-wide text-destructive-foreground transition-all hover:bg-destructive/90 shadow-lg shadow-destructive/30 uppercase whitespace-nowrap">
+                      Send Report
+                    </button>
+                  </form>
+                ) : (
+                  <div className="mx-auto max-w-md w-full bg-green-500/10 border border-green-500/20 p-3 sm:p-4 text-green-500 font-bold text-xs sm:text-sm mx-2">
+                    Report Sent Successfully. Check your inbox.
+                    <div className="mt-3 sm:mt-4 flex justify-center">
+                       <a href="/contact" className="w-full sm:w-auto bg-destructive/90 px-4 py-2 sm:px-6 sm:py-2 text-xs font-bold tracking-wide text-destructive-foreground transition-all hover:bg-destructive uppercase text-center block">
+                         Contact Firm Now
+                       </a>
+                    </div>
+                  </div>
+                )}
+                
+                <p className="mt-4 text-[9px] sm:text-[11px] text-muted-foreground uppercase tracking-widest font-mono px-2">
+                   * Detailed dossier requires manual Analyst verification *
+                </p>
               </motion.div>
             )}
           </AnimatePresence>

@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import { Upload, ArrowRight } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import emailjs from "@emailjs/browser";
+import { toast } from "sonner";
 
 const investigationTypes = [
   "Corporate Investigation", "Background Verification", "Insurance Investigation",
@@ -16,8 +18,41 @@ const ConfidentialInquiry = () => {
     contactMethod: "email", name: "", email: "", phone: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => { e.preventDefault(); setSubmitted(true); };
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        "template_87z7zhf",
+        {
+          to_name: form.name,
+          to_email: form.email,
+          from_name: "GDSS Investigations",
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          type: form.type,
+          subjectName: form.subjectName,
+          location: form.location,
+          description: form.description,
+          contactMethod: form.contactMethod,
+          reply_to: form.email,
+        },
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      );
+      setSubmitted(true);
+      toast.success("Inquiry submitted successfully");
+    } catch (error) {
+      console.error("Failed to send template email", error);
+      toast.error("Failed to submit inquiry. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   const inputClass = "w-full border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none";
 
   return (
@@ -106,8 +141,8 @@ const ConfidentialInquiry = () => {
                   </div>
                 </div>
 
-                <button type="submit" className="group flex w-full items-center justify-center gap-2 bg-primary py-3.5 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90">
-                  Submit Confidential Inquiry
+                <button type="submit" disabled={isSubmitting} className="group flex w-full items-center justify-center gap-2 bg-primary py-3.5 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90 disabled:opacity-70 disabled:cursor-not-allowed">
+                  {isSubmitting ? "Submitting..." : "Submit Confidential Inquiry"}
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </button>
               </motion.form>

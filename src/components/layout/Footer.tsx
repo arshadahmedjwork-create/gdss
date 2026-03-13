@@ -18,7 +18,7 @@ const Footer = () => {
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div className="space-y-4">
-            <img src={gdssLogo} alt="GDSS Investigations" className="h-10 brightness-0 invert" />
+            <img src={gdssLogo} alt="GDSS Investigations" className="h-10 brightness-1 " />
             <p className="text-sm leading-relaxed text-background/60">
               Professional investigation and corporate intelligence services since 1993. A division of Gautam Diligent Security Solutions & IFM Services Pvt Ltd.
             </p>
