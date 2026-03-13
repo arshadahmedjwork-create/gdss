@@ -29,7 +29,7 @@ const Navbar = () => {
   const location = useLocation();
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-border/30 bg-background/80 backdrop-blur-xl">
+    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-background/95 backdrop-blur-sm">
       <div className="container mx-auto flex items-center justify-between px-6 py-4">
         <Link to="/" className="flex items-center gap-3">
           <img src={gdssLogo} alt="GDSS Investigations" className="h-10" />
@@ -60,13 +60,13 @@ const Navbar = () => {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 8 }}
                       transition={{ duration: 0.2 }}
-                      className="absolute left-0 top-full mt-2 w-64 rounded-md border border-border/50 bg-card/95 p-2 shadow-2xl backdrop-blur-xl"
+                      className="absolute left-0 top-full mt-2 w-64 border border-border bg-background p-2 shadow-lg"
                     >
                       {link.children.map((child) => (
                         <Link
                           key={child.path}
                           to={child.path}
-                          className="block rounded-sm px-4 py-2.5 text-sm text-foreground/70 transition-colors hover:bg-secondary hover:text-primary"
+                          className="block px-4 py-2.5 text-sm text-foreground/70 transition-colors hover:bg-subtle hover:text-primary"
                         >
                           {child.label}
                         </Link>
@@ -95,7 +95,7 @@ const Navbar = () => {
           </a>
           <Link
             to="/inquiry"
-            className="rounded-sm bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-all hover:bg-primary/90"
+            className="bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-all hover:bg-primary/90"
           >
             Confidential Inquiry
           </Link>
@@ -118,7 +118,7 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="border-t border-border/30 bg-background lg:hidden overflow-hidden"
+            className="border-t border-border bg-background lg:hidden overflow-hidden"
           >
             <div className="container mx-auto flex flex-col gap-1 px-6 py-4">
               {navLinks.map((link) => (
@@ -145,7 +145,7 @@ const Navbar = () => {
               <Link
                 to="/inquiry"
                 onClick={() => setMobileOpen(false)}
-                className="mt-4 rounded-sm bg-primary px-5 py-2.5 text-center text-sm font-medium text-primary-foreground"
+                className="mt-4 bg-primary px-5 py-2.5 text-center text-sm font-medium text-primary-foreground"
               >
                 Confidential Inquiry
               </Link>
