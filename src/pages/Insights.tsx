@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
@@ -13,6 +14,29 @@ const articles = [
 ];
 
 const InsightsPage = () => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px"
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    const cards = document.querySelectorAll(".service-card-trigger");
+    cards.forEach((card) => observer.observe(card));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -26,27 +50,28 @@ const InsightsPage = () => {
 
           <div className="grid gap-px bg-border sm:grid-cols-2 lg:grid-cols-3">
             {articles.map((article, i) => (
-              <motion.article
+              <div
                 key={article.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                className="group cursor-pointer bg-background p-7 transition-all hover:bg-subtle"
+                className="service-card-trigger"
+                style={{ transitionDelay: `${i * 0.1}s` }}
               >
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-xs font-medium text-primary">{article.category}</span>
-                  <span className="text-xs text-muted-foreground">{article.date}</span>
-                </div>
-                <h3 className="font-heading text-lg font-semibold leading-snug text-foreground group-hover:text-primary transition-colors">{article.title}</h3>
-                <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{article.excerpt}</p>
-                <div className="mt-4 flex items-center justify-between">
-                  <span className="text-xs text-muted-foreground">{article.readTime}</span>
-                  <div className="flex items-center gap-1 text-xs font-medium text-primary">
-                    Read more <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
+                <article className="group flex h-full flex-col bg-background p-10 transition-all service-card cursor-pointer">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-xs font-medium text-primary">{article.category}</span>
+                    <span className="text-xs text-muted-foreground">{article.date}</span>
                   </div>
-                </div>
-              </motion.article>
+                  <h3 className="font-heading text-lg font-semibold leading-snug text-foreground transition-transform duration-300 group-hover:scale-105 origin-left">
+                    {article.title}
+                  </h3>
+                  <p className="mt-3 flex-1 text-sm text-muted-foreground leading-relaxed">{article.excerpt}</p>
+                  <div className="mt-4 flex items-center justify-between">
+                    <span className="text-xs text-muted-foreground">{article.readTime}</span>
+                    <div className="flex items-center gap-1 text-xs font-medium text-primary">
+                      Read more <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
+                    </div>
+                  </div>
+                </article>
+              </div>
             ))}
           </div>
         </div>

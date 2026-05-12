@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
@@ -26,8 +27,31 @@ const services = [
 ];
 
 const ServicesSection = () => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px"
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    const cards = document.querySelectorAll(".service-card-trigger");
+    cards.forEach((card) => observer.observe(card));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className="py-24">
+    <section className="py-24" ref={sectionRef}>
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -46,16 +70,14 @@ const ServicesSection = () => {
 
         <div className="grid gap-px bg-border md:grid-cols-2">
           {services.map((service, i) => (
-            <motion.div
+            <div
               key={service.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.5 }}
+              className="service-card-trigger"
+              style={{ transitionDelay: `${i * 0.1}s` }}
             >
               <Link
                 to={service.path}
-                className="group flex h-full flex-col bg-background p-10 transition-all hover:bg-subtle"
+                className="group flex h-full flex-col bg-background p-10 transition-all service-card"
               >
                 <span className="text-xs font-medium uppercase tracking-[0.15em] text-primary mb-4">
                   {String(i + 1).padStart(2, "0")}
@@ -67,7 +89,7 @@ const ServicesSection = () => {
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </div>
               </Link>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

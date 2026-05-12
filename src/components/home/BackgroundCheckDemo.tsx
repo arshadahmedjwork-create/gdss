@@ -21,7 +21,7 @@ const BackgroundCheckDemo = () => {
   };
 
   const inputClass =
-    "border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none w-full";
+    "border-[1.5px] border-foreground/30 bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none w-full transition-all";
 
   return (
     <>
@@ -45,23 +45,13 @@ const BackgroundCheckDemo = () => {
           </motion.div>
 
           <div className="mx-auto max-w-2xl">
-            <div className="border border-border bg-background overflow-hidden">
-              {/* Header bar */}
-              <div className="flex items-center gap-2 border-b border-border px-5 py-3 bg-subtle">
-                <div className="h-2.5 w-2.5 rounded-full bg-primary/60" />
-                <div className="h-2.5 w-2.5 rounded-full bg-muted-foreground/30" />
-                <div className="h-2.5 w-2.5 rounded-full bg-muted-foreground/20" />
-                <span className="ml-3 text-xs text-muted-foreground font-mono">
-                  gdss://intelligence-console
-                </span>
-              </div>
-
-              <div className="p-6 sm:p-8">
-                <p className="mb-6 text-xs text-muted-foreground uppercase tracking-wider">
+            <div className="border-[1.5px] border-foreground/30 bg-background overflow-hidden shadow-xl">
+              <div className="p-6 sm:p-10">
+                <p className="mb-8 text-center text-xs font-semibold text-foreground/80 uppercase tracking-[0.2em]">
                   Enter subject details to begin simulation
                 </p>
 
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-5">
                   <div className="grid gap-4 sm:grid-cols-2">
                     <input type="text" placeholder="Full Name *" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className={inputClass} required />
                     <input type="tel" placeholder="Phone Number" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className={inputClass} />
@@ -73,13 +63,13 @@ const BackgroundCheckDemo = () => {
 
                   <button
                     type="submit"
-                    className="w-full bg-primary py-3.5 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90 flex items-center justify-center gap-2"
+                    className="w-full bg-primary py-3.5 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90 flex items-center justify-center gap-2 rounded-[6px]"
                   >
                     <Lock className="h-4 w-4" />
                     Start Investigation
                   </button>
 
-                  <p className="text-center text-[10px] text-muted-foreground/60">
+                  <p className="text-center text-[10px] text-muted-foreground/90">
                     This is a demonstration simulation. No real data is collected or processed.
                   </p>
                 </form>

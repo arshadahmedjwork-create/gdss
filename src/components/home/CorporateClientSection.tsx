@@ -29,7 +29,7 @@ const CorporateClientSection = () => {
             </p>
             <Link
               to="/contact"
-              className="mt-8 inline-flex items-center gap-2 bg-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90"
+              className="mt-8 inline-flex items-center gap-2 bg-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90 rounded-[6px]"
             >
               Book Corporate Consultation
               <ArrowRight className="h-4 w-4" />

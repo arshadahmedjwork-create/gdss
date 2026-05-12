@@ -1,7 +1,41 @@
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import gdssLogo from "@/assets/gdss-logo.png";
+
+const CountUp = ({ target, showPlus = false }: { target: number; showPlus?: boolean }) => {
+  const [count, setCount] = useState(0);
+  const [started, setStarted] = useState(false);
+
+  useEffect(() => {
+    if (!started || target === 0) return;
+    const duration = 2000;
+    const steps = 60;
+    const increment = target / steps;
+    let current = 0;
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= target) {
+        setCount(target);
+        clearInterval(timer);
+      } else {
+        setCount(Math.floor(current));
+      }
+    }, duration / steps);
+    return () => clearInterval(timer);
+  }, [started, target]);
+
+  return (
+    <motion.span
+      onViewportEnter={() => setStarted(true)}
+      viewport={{ once: true }}
+    >
+      {count}
+      {showPlus && "+"}
+    </motion.span>
+  );
+};
 
 const About = () => {
   return (
@@ -29,25 +63,50 @@ const About = () => {
             <p className="text-sm uppercase tracking-[0.2em] text-muted-foreground mt-1">of Investigation Experience</p>
           </div>
 
-          <div className="grid gap-px bg-border grid-cols-2 lg:grid-cols-4 mb-16">
-            {[
-              { label: "30+", desc: "Years of Experience" },
-              { label: "1993", desc: "Year Founded" },
-              { label: "500+", desc: "Cases Annually" },
-              { label: "Pan-India", desc: "Coverage" },
-            ].map((stat, i) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="bg-background p-6 text-center"
-              >
-                <p className="font-heading text-2xl font-bold text-foreground">{stat.label}</p>
-                <p className="text-sm text-muted-foreground">{stat.desc}</p>
-              </motion.div>
-            ))}
+          <div className="bg-primary rounded-sm overflow-hidden mb-16">
+            <div className="grid grid-cols-2 gap-8 lg:grid-cols-4 py-16 px-6">
+              {[
+                { countTo: 30, showPlus: true, desc: "Years of Experience" },
+                { countTo: 1993, showPlus: false, desc: "Year Founded" },
+                { countTo: 500, showPlus: true, desc: "Cases Annually" },
+                { label: "Pan-India", desc: "Coverage", countTo: 0 },
+              ].map((stat, i) => (
+                <motion.div
+                  key={stat.desc}
+                  initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ delay: i * 0.15, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                  className="text-center relative group"
+                >
+                  <motion.div
+                    initial={{ scaleX: 0 }}
+                    whileInView={{ scaleX: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.15 + 0.4, duration: 0.5, ease: "easeOut" }}
+                    className="absolute bottom-0 left-1/4 right-1/4 h-0.5 bg-black origin-left"
+                  />
+                  <div className="pb-4">
+                    <p className="font-heading text-3xl lg:text-4xl font-bold text-white">
+                      {stat.countTo > 0 ? (
+                        <CountUp target={stat.countTo} showPlus={stat.showPlus} />
+                      ) : (
+                        stat.label
+                      )}
+                    </p>
+                    <motion.p
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.15 + 0.3, duration: 0.5 }}
+                      className="text-sm text-white mt-2"
+                    >
+                      {stat.desc}
+                    </motion.p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
 
           <div className="grid gap-16 lg:grid-cols-2">
@@ -64,12 +123,30 @@ const About = () => {
               </p>
             </motion.div>
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="flex items-center justify-center border border-border p-12"
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              className="flex items-center justify-center border border-border p-12 bg-white/50 backdrop-blur-[2px] rounded-lg shadow-sm"
             >
-              <img src={gdssLogo} alt="GDSS Investigations" className="max-h-20" />
+              <motion.img 
+                src={gdssLogo} 
+                alt="GDSS Investigations" 
+                className="max-h-24 drop-shadow-lg"
+                animate={{
+                  y: [0, -8, 0],
+                }}
+                transition={{
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+                whileHover={{ 
+                  scale: 1.1,
+                  filter: "brightness(1.1)",
+                  transition: { duration: 0.4, ease: "easeOut" }
+                }}
+              />
             </motion.div>
           </div>
         </div>

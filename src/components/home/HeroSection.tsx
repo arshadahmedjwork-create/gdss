@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import heroCorporate from "@/assets/hero-corporate.jpg";
+import heroCorporate from "@/assets/image copy 23.png";
 
 const HeroSection = () => {
   return (
@@ -48,11 +48,52 @@ const HeroSection = () => {
               Since 1993 · 30+ Years of Excellence
             </p>
 
-            <h1 className="text-4xl font-heading font-bold leading-[1.1] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-              Corporate Investigation
-              <br />
-              <span className="text-primary">&amp; Intelligence Services</span>
-            </h1>
+            <motion.h1 
+              initial="hidden"
+              animate="visible"
+              variants={{
+                hidden: { opacity: 1 },
+                visible: {
+                  opacity: 1,
+                  transition: {
+                    staggerChildren: 0.18,
+                    delayChildren: 0.2
+                  }
+                }
+              }}
+              className="text-4xl font-heading font-bold leading-[1.1] tracking-tight text-foreground sm:text-5xl lg:text-6xl"
+            >
+              <span className="block overflow-hidden">
+                <motion.span 
+                  variants={{
+                    hidden: { y: "100%", opacity: 0 },
+                    visible: { 
+                      y: 0, 
+                      opacity: 1,
+                      transition: { duration: 1, ease: [0.22, 1, 0.36, 1] }
+                    }
+                  }}
+                  className="block"
+                >
+                  Corporate Investigation
+                </motion.span>
+              </span>
+              <span className="block overflow-hidden">
+                <motion.span 
+                  variants={{
+                    hidden: { y: "100%", opacity: 0 },
+                    visible: { 
+                      y: 0, 
+                      opacity: 1,
+                      transition: { duration: 1, ease: [0.22, 1, 0.36, 1] }
+                    }
+                  }}
+                  className="block text-primary"
+                >
+                  & Intelligence Services
+                </motion.span>
+              </span>
+            </motion.h1>
 
             <p className="mt-6 max-w-lg text-lg leading-relaxed text-muted-foreground">
               Professional investigations backed by over 30 years of experience.
@@ -63,14 +104,14 @@ const HeroSection = () => {
             <div className="mt-10 flex flex-wrap gap-4">
               <Link
                 to="/inquiry"
-                className="group flex items-center gap-2 bg-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90"
+                className="navbar-cta-btn px-7 py-3.5 text-sm font-semibold flex items-center gap-2 group"
               >
                 Start Investigation
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
               <Link
                 to="/contact"
-                className="border border-foreground/20 px-7 py-3.5 text-sm font-medium text-foreground transition-all hover:border-primary hover:text-primary"
+                className="navbar-cta-btn px-7 py-3.5 text-sm font-medium"
               >
                 Book Confidential Consultation
               </Link>

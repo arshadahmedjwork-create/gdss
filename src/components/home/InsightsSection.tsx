@@ -56,17 +56,17 @@ const InsightsSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08 }}
-              className="group cursor-pointer bg-background p-7 transition-all hover:bg-subtle"
+              className="group cursor-pointer bg-primary p-7 transition-all"
             >
               <div className="flex items-center justify-between">
-                <span className="text-xs font-medium text-primary">{article.category}</span>
-                <span className="text-xs text-muted-foreground">{article.date}</span>
+                <span className="text-xs font-medium text-white/90">{article.category}</span>
+                <span className="text-xs text-white/70">{article.date}</span>
               </div>
-              <h3 className="mt-3 font-heading text-base font-semibold leading-snug text-foreground group-hover:text-primary transition-colors">
+              <h3 className="mt-3 font-heading text-base font-semibold leading-snug text-white transition-transform duration-300 group-hover:scale-105 origin-left">
                 {article.title}
               </h3>
-              <p className="mt-2 text-sm text-muted-foreground">{article.excerpt}</p>
-              <div className="mt-4 flex items-center gap-1 text-xs font-medium text-primary">
+              <p className="mt-2 text-sm text-black">{article.excerpt}</p>
+              <div className="mt-4 flex items-center gap-1 text-xs font-medium text-white">
                 Read more
                 <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
               </div>

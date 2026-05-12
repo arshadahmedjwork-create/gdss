@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -14,6 +15,29 @@ const industries = [
 ];
 
 const Industries = () => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px"
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    const cards = document.querySelectorAll(".service-card-trigger");
+    cards.forEach((card) => observer.observe(card));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -27,23 +51,24 @@ const Industries = () => {
 
           <div className="grid gap-px bg-border sm:grid-cols-2 lg:grid-cols-3">
             {industries.map((ind, i) => (
-              <motion.div
+              <div
                 key={ind.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                className="bg-background p-8 transition-all hover:bg-subtle"
+                className="service-card-trigger"
+                style={{ transitionDelay: `${i * 0.1}s` }}
               >
-                <span className="text-xs font-mono text-primary mb-3 block">{String(i + 1).padStart(2, "0")}</span>
-                <h3 className="font-heading text-lg font-semibold text-foreground">{ind.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{ind.desc}</p>
-              </motion.div>
+                <div className="group flex h-full flex-col bg-background p-10 transition-all service-card">
+                  <span className="text-xs font-medium uppercase tracking-[0.15em] text-primary mb-4 block">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="font-heading text-xl font-semibold text-foreground">{ind.title}</h3>
+                  <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{ind.desc}</p>
+                </div>
+              </div>
             ))}
           </div>
 
           <div className="mt-16 text-center">
-            <Link to="/contact" className="group inline-flex items-center gap-2 bg-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90">
+            <Link to="/contact" className="group inline-flex items-center gap-2 bg-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90 rounded-[6px]">
               Discuss Your Industry Needs <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </div>

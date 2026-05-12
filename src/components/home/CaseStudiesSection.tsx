@@ -52,7 +52,7 @@ const CaseStudiesSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="border border-border p-8"
+              className="border border-foreground/20 p-8"
             >
               <span className="mb-4 inline-block text-xs font-medium uppercase tracking-[0.15em] text-primary">
                 {c.tag}
