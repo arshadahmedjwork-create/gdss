@@ -25,14 +25,14 @@ const CTASection = () => {
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <Link
               to="/inquiry"
-              className="group flex items-center gap-2 bg-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90"
+              className="group flex items-center gap-2 bg-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90 rounded-[6px]"
             >
               Submit Confidential Inquiry
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
             <a
               href="tel:+919999999999"
-              className="flex items-center gap-2 border border-background/20 px-7 py-3.5 text-sm font-medium text-background transition-all hover:border-background/40"
+              className="flex items-center gap-2 border border-background/20 px-7 py-3.5 text-sm font-medium text-background transition-all hover:border-background/40 rounded-[6px]"
             >
               <Phone className="h-4 w-4" />
               Call Now

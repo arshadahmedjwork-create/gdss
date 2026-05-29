@@ -1,9 +1,10 @@
 import { useState } from "react";
+import emailjs from "@emailjs/browser";
 import { motion } from "framer-motion";
 import { Upload, ArrowRight } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import emailjs from "@emailjs/browser";
+import { supabase } from "@/lib/supabase";
 import { toast } from "sonner";
 
 const investigationTypes = [
@@ -25,34 +26,55 @@ const ConfidentialInquiry = () => {
     setIsSubmitting(true);
 
     try {
-      await emailjs.send(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID,
-        "template_87z7zhf",
-        {
-          to_name: form.name,
-          to_email: form.email,
-          from_name: "GDSS Investigations",
-          name: form.name,
+      // Insert into Supabase
+      const { error: dbError } = await supabase
+        .from('confidential_inquiries')
+        .insert([{
+          full_name: form.name,
           email: form.email,
           phone: form.phone,
-          type: form.type,
-          subjectName: form.subjectName,
-          location: form.location,
-          description: form.description,
-          contactMethod: form.contactMethod,
-          reply_to: form.email,
-        },
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-      );
+          company: "", // Not present in UI but requested in schema
+          inquiry_details: `Investigation: ${form.type}\nSubject: ${form.subjectName}\nLocation: ${form.location}\nDescription: ${form.description}\nContact Method: ${form.contactMethod}`,
+          status: 'pending'
+        }]);
+
+      if (dbError) throw dbError;
+
+      // Optional: Keep EmailJS if the user wants email notifications too
+      try {
+        await emailjs.send(
+          import.meta.env.VITE_EMAILJS_SERVICE_ID,
+          "template_87z7zhf",
+          {
+            to_name: form.name,
+            to_email: form.email,
+            from_name: "GDSS Investigations",
+            name: form.name,
+            email: form.email,
+            phone: form.phone,
+            type: form.type,
+            subjectName: form.subjectName,
+            location: form.location,
+            description: form.description,
+            contactMethod: form.contactMethod,
+            reply_to: form.email,
+          },
+          import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+        );
+      } catch (emailError) {
+        console.warn("Email notification failed, but database record was created", emailError);
+      }
+
       setSubmitted(true);
       toast.success("Inquiry submitted successfully");
     } catch (error) {
-      console.error("Failed to send template email", error);
+      console.error("Failed to submit inquiry", error);
       toast.error("Failed to submit inquiry. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
   };
+
   const inputClass = "w-full border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none";
 
   return (

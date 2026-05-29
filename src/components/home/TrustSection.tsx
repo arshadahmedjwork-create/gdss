@@ -44,7 +44,7 @@ const CountUp = ({ target, suffix }: { target: number; suffix: string }) => {
 
 const TrustSection = () => {
   return (
-    <section className="border-b border-border bg-subtle overflow-hidden">
+    <section className="bg-primary overflow-hidden">
       <div className="container mx-auto px-6 py-16">
         <div className="grid grid-cols-2 gap-8 lg:grid-cols-4">
           {stats.map((stat, i) => (
@@ -62,10 +62,10 @@ const TrustSection = () => {
                 whileInView={{ scaleX: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.15 + 0.4, duration: 0.5, ease: "easeOut" }}
-                className="absolute bottom-0 left-1/4 right-1/4 h-0.5 bg-primary origin-left"
+                className="absolute bottom-0 left-1/4 right-1/4 h-0.5 bg-black origin-left"
               />
               <div className="pb-4">
-                <p className="font-heading text-3xl lg:text-4xl font-bold text-foreground">
+                <p className="font-heading text-3xl lg:text-4xl font-bold text-white">
                   {stat.countTo > 0 ? (
                     <CountUp target={stat.countTo} suffix={stat.suffix} />
                   ) : (
@@ -77,7 +77,7 @@ const TrustSection = () => {
                   whileInView={{ opacity: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.15 + 0.3, duration: 0.5 }}
-                  className="text-sm text-muted-foreground mt-2"
+                  className="text-sm text-white mt-2"
                 >
                   {stat.desc}
                 </motion.p>
