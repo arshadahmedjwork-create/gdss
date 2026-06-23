@@ -25,7 +25,7 @@ const IndustriesServed = () => {
           className="mb-16 text-center"
         >
           <span className="text-xs font-bold uppercase tracking-[0.25em] text-primary">Sector Expertise</span>
-          <h2 className="mt-3 font-heading text-3xl font-bold sm:text-4xl text-foreground">Industries We Protect</h2>
+          <h2 className="mt-3 font-heading text-3xl font-bold sm:text-4xl text-foreground uppercase">INDUSTRIES WE SERVE</h2>
         </motion.div>
 
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4">

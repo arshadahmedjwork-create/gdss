@@ -136,6 +136,236 @@ export const nriData: ServicePageData = {
     { question: "Can you work with clients outside India?", answer: "Yes. Callback slots support India, Gulf, US/Canada, and Europe time zones." },
     { question: "Do you verify property occupancy?", answer: "Yes. Property, tenant, neighborhood, and local field enquiries can be scoped." },
     { question: "Can you help with missing person tracing?", answer: "Yes. Urgent missing person matters should be submitted through the emergency hotline or inquiry form." },
-    { question: "How are updates sent?", answer: "Updates can be shared through secure email, phone, or WhatsApp with authorized contacts only." },
   ],
+};
+
+export const backgroundVerificationChennaiData: ServicePageData = {
+  eyebrow: "Chennai Branch Operations",
+  title: "Background Verification Services in Chennai",
+  description:
+    "Expert employee background checks, tenant screening, and corporate verification services across Chennai and surrounding industrial hubs like Sriperumbudur and Oragadam.",
+  highlights: ["Local Tamil-speaking field investigators", "Fast 48-hour turnarounds", "Strictly legal and compliant processes"],
+  services: [
+    "Employment history check",
+    "Address physical verification",
+    "Educational credential check",
+    "Local police record verification",
+    "Court record searches",
+    "Reference checks",
+    "Identity card confirmation"
+  ],
+  benefits: [
+    "Leverage local operatives familiar with Chennai neighborhoods, universities, and corporate registers.",
+    "Minimize hiring risks and ensure vendor compliance with physical verification reports.",
+    "Enjoy fast, direct coordination without middle agencies."
+  ],
+  process: [
+    "Define candidate details, verification goals, and local consent guidelines.",
+    "Dispatch local Chennai operatives to conduct site, school, or address visits.",
+    "Execute digital database checks for civil litigation and criminal records.",
+    "Compile and deliver a comprehensive report with geo-tagged media proof."
+  ],
+  faqs: [
+    { question: "Do you verify addresses in Chennai suburban areas?", answer: "Yes, our coverage includes central districts as well as industrial corridors like OMR, GST Road, Sriperumbudur, and Ambattur." },
+    { question: "What is the standard TAT for Chennai background checks?", answer: "Most standard verifications are completed within 3 to 5 business days." },
+    { question: "How do you verify local academic degrees?", answer: "We coordinate directly with registrar offices of Anna University, Madras University, and other Chennai-based institutions." }
+  ]
+};
+
+export const preMatrimonialIndiaData: ServicePageData = {
+  eyebrow: "Family Court & Registry Search",
+  title: "Pre Matrimonial Investigation in India",
+  description:
+    "Discreet background verification to confirm marital status, financial liabilities, character, and employment details of prospective alliances across India.",
+  highlights: ["Subject is never alerted", "Strictly confidential reporting", "Experienced field operatives"],
+  services: [
+    "Marital status verification",
+    "Employment & salary confirmation",
+    "Family background & reputation check",
+    "Financial assets & liabilities review",
+    "Social media footprint analysis",
+    "Address verification",
+    "Discreet neighborhood enquiries"
+  ],
+  benefits: [
+    "Ensure complete transparency before making a major life decision.",
+    "Uncover concealed marriages, financial debts, or falsified professional histories.",
+    "Keep your family's inquiry totally private and confidential."
+  ],
+  process: [
+    "Consult on the background details and boundaries of the inquiry.",
+    "Conduct discreet digital and physical record checks across relevant jurisdictions.",
+    "Deploy undercover field investigators for neighborhood reputation enquiries.",
+    "Provide a detailed, evidence-backed dossier and a phone debrief."
+  ],
+  faqs: [
+    { question: "Will the partner or their family find out about this check?", answer: "No. Our methodology relies on open-source intelligence and discreet field observations that maintain absolute confidentiality." },
+    { question: "Can you verify alliances who recently moved to another city?", answer: "Yes. Our Pan-India network enables us to trace background details across multiple cities seamlessly." },
+    { question: "How long does a matrimonial check take?", answer: "A thorough pre-matrimonial investigation generally takes between 7 to 10 working days." }
+  ]
+};
+
+export const insuranceClaimInvestigationData: ServicePageData = {
+  eyebrow: "Claims Risk Assessment",
+  title: "Insurance Claim Investigation Services",
+  description:
+    "Rigorous field investigation of high-value life, health, motor, and accidental insurance claims to identify fraud, inflation, and misrepresentation.",
+  highlights: ["Rapid response team", "Expert forensic analysts", "Defensible evidence gathering"],
+  services: [
+    "Death claim verification",
+    "Hospital records audit",
+    "Accident scene analysis",
+    "Witness statement collection",
+    "Claimant profile checks",
+    "Pre-existing condition analysis",
+    "Treatment verification"
+  ],
+  benefits: [
+    "Significantly reduce loss ratios by flagging fraudulent and inflated claims before payout.",
+    "Retrieve original hospital logs, treatment charts, and attending physician statements.",
+    "Gain clear, legally admissible evidence reports ready for compliance reviews."
+  ],
+  process: [
+    "Intake claim details, timelines, policy documents, and specific red flags.",
+    "Deploy investigators to hospitals, clinics, police stations, and accident spots.",
+    "Collect records, photographs, and statements to construct the case timeline.",
+    "Deliver a structured report highlighting discrepancies or verifying authentic claims."
+  ],
+  faqs: [
+    { question: "Do you investigate rural claims?", answer: "Yes, our field network covers remote rural areas where medical infrastructure checks require local travel." },
+    { question: "Can you detect forged death certificates?", answer: "Yes. We verify the certificate registration number directly with municipality and panchayat records." },
+    { question: "What is your coverage timeline for claim investigations?", answer: "We prioritize urgent claims with initial field reports delivered within 48 to 72 hours." }
+  ]
+};
+
+export const employeeVerificationAgencyData: ServicePageData = {
+  eyebrow: "Enterprise Risk Management",
+  title: "Employee Verification Agency",
+  description:
+    "A full-service background check agency partner offering end-to-end employee screening, identity verification, and credentials checking at scale.",
+  highlights: ["Dedicated client account managers", "Custom screening packages", "API-ready reporting models"],
+  services: [
+    "Identity & document checks",
+    "Academic credential audits",
+    "Previous employment verification",
+    "Address physical visits",
+    "Criminal record database checks",
+    "Credit history reviews",
+    "Global database watchlist screening"
+  ],
+  benefits: [
+    "Protect company assets, reputation, and intellectual property from insider threats.",
+    "Automate standard screening workflows for HR and onboarding teams.",
+    "Ensure complete compliance with industry regulators, including ISO standards."
+  ],
+  process: [
+    "Integrate our portal with your HR workflow or receive batch verification requests.",
+    "Run automated and physical checks across educational, professional, and legal records.",
+    "Audit results through our internal compliance and quality assurance team.",
+    "Issue a finalized digital green/red risk profile report."
+  ],
+  faqs: [
+    { question: "Do you support volume hires?", answer: "Yes, we handle bulk screening packages for large corporate cohorts, IT parks, and retail branches." },
+    { question: "Is candidate consent required?", answer: "Yes, we require candidate authorization and consent before initiating any standard employment screening." },
+    { question: "Can we customize the screening elements?", answer: "Absolutely. You can select specific checks (e.g., only education or only address) based on role requirements." }
+  ]
+};
+
+export const detectiveAgencyNRIsData: ServicePageData = {
+  eyebrow: "Global Client Division",
+  title: "Detective Agency for NRIs",
+  description:
+    "Tailored intelligence, property checks, matrimonial investigations, and asset verification in India for clients residing in the US, UK, Canada, Gulf, and Australia.",
+  highlights: ["Dedicated NRI communication desk", "Real-time remote reporting", "Time-zone aligned coordination"],
+  services: [
+    "Property boundary & encroachment checks",
+    "Prospective spouse pre-marriage checks",
+    "Family dispute intelligence",
+    "Missing relative search in India",
+    "Tenant activity monitoring",
+    "Asset & land records search",
+    "Local dispute resolution field checks"
+  ],
+  benefits: [
+    "Protect your Indian assets, land, and family interests while living abroad.",
+    "Get authentic ground intelligence without needing to travel to India.",
+    "Maintain contact via encrypted chat (WhatsApp, Signal) and secure video calls."
+  ],
+  process: [
+    "Receive project brief and coordinate consultation over WhatsApp or Zoom.",
+    "Deploy field operatives to target properties or families across India.",
+    "Gather documents, video footage, and localized neighbor testimonials.",
+    "Submit a secure encrypted report with multimedia evidence download links."
+  ],
+  faqs: [
+    { question: "Can you check if my land in India is being encroached?", answer: "Yes. Our team can visit the site, record current conditions, verify local land registry logs, and interview neighbors." },
+    { question: "How do you coordinate with different time zones?", answer: "Our NRI division operates desk shifts that align with standard working hours in the US, UK, and Gulf." },
+    { question: "Is payment accepted internationally?", answer: "Yes, we support secure international bank wire transfers, credit card payments, and online portals." }
+  ]
+};
+
+export const tenantVerificationServicesData: ServicePageData = {
+  eyebrow: "Residential Risk Mitigation",
+  title: "Tenant Verification Services",
+  description:
+    "Comprehensive background screening for landlords, real estate managers, and co-living providers to confirm tenant identity, employment, and rental records.",
+  highlights: ["Local police coordinate checks", "Employment confirmations", "Fast 24-hour options"],
+  services: [
+    "Aadhaar & PAN card verification",
+    "Local police verification filing",
+    "Previous landlord reference checks",
+    "Active employment verification",
+    "Civil registry litigation search",
+    "Permanent address validation",
+    "Co-tenant profile validation"
+  ],
+  benefits: [
+    "Prevent illegal activities, subletting, and lease defaults on your properties.",
+    "Fulfill legal mandates for local police tenant registration.",
+    "Gain peace of mind knowing who is occupying your real estate assets."
+  ],
+  process: [
+    "Receive tenant documents and signed rental application details.",
+    "Verify the tenant's employment standing and contact previous references.",
+    "Process physical police clearance requests in accordance with local regulations.",
+    "Issue a completed verification dossier to the property owner."
+  ],
+  faqs: [
+    { question: "Is police verification mandatory for tenants in India?", answer: "Yes, in most major cities, filing tenant verification details with the local police station is a legal requirement for landlords." },
+    { question: "Can you verify commercial tenants?", answer: "Yes, we verify company registration, GST status, and director profiles for commercial lease agreements." },
+    { question: "How fast can you run a tenant background check?", answer: "Basic identity and employment checks can be delivered in 24 to 48 hours." }
+  ]
+};
+
+export const corporateDueDiligenceIndiaData: ServicePageData = {
+  eyebrow: "Transaction Intelligence",
+  title: "Corporate Due Diligence India",
+  description:
+    "In-depth company background investigations, director searches, regulatory compliance checks, and reputation audits for mergers, acquisitions, and partnerships in India.",
+  highlights: ["Legal & financial database audits", "Discrete human source enquiries", "Experienced corporate analysts"],
+  services: [
+    "MCA & ROC filing audits",
+    "Director background & connection checks",
+    "Litigation history check",
+    "GST and tax compliance history",
+    "Market reputation enquiries",
+    "Site and facility physical visits",
+    "Related party transaction flags"
+  ],
+  benefits: [
+    "Avoid entering risky joint ventures, partnerships, or buying legacy liabilities.",
+    "Uncover hidden litigation, tax defaults, and director conflicts of interest.",
+    "Secure detailed reports that support board resolutions and investor due diligence."
+  ],
+  process: [
+    "Consult on transaction goals and define the entities and individuals in scope.",
+    "Review ROC, court databases, insolvency registries, and tax portals.",
+    "Conduct site inspections and gather market intelligence from suppliers and competitors.",
+    "Provide a detailed, decision-ready due diligence report."
+  ],
+  faqs: [
+    { question: "Do you provide financial forensics?", answer: "Yes. We review public filings, balance sheets, and tax status indicators for anomalies and potential risks." },
+    { question: "Can this due diligence be performed without alerting the target?", answer: "Yes. We specialize in discreet, public-record-based intelligence and external interviews that do not alert the target company." },
+    { question: "Which databases do you search?", answer: "We query the MCA registry, commercial courts, consumer forums, debt recovery tribunals, tax databases, and global sanctions list." }
+  ]
 };

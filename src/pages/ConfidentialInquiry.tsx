@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, ShieldCheck, Lock, Upload } from "lucide-react";
+import { ArrowRight, ShieldCheck, Lock, Upload, PhoneCall, AlertTriangle, UserSearch, ShieldAlert, Clock } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { supabase } from "@/lib/supabase";
@@ -8,11 +8,61 @@ import { toast } from "sonner";
 
 const investigationTypes = [
   "Corporate BGV",
-  "Insurance Fraud",
-  "Matrimonial Verification",
+  "Vendor Verification",
+  "Fraud Investigation",
   "Due Diligence",
-  "NRI Verification",
-  "Other"
+  "Mystery Audit",
+  "Asset Verification",
+  "Workplace Misconduct",
+  "Absconding Employee Trace",
+  "Field Verification",
+  "Pre-matrimonial Investigation",
+  "Character Verification",
+  "Employment Verification",
+  "Family Background Verification",
+  "Lifestyle Verification",
+  "Social Media Investigation",
+  "Financial Status Verification",
+  "Hidden Marriage/Divorce Verification",
+  "India-Based Family Verification",
+  "Property Verification",
+  "Marriage Alliance Investigation",
+  "Missing Person Tracing",
+  "Tenant Verification",
+  "Inheritance Dispute Investigation",
+  "Local Field Enquiries",
+  "Insurance Fraud Investigation",
+  "Other",
+];
+
+const emergencyCategories = [
+  {
+    icon: ShieldAlert,
+    title: "Fraud Cases",
+    subtitle: "Immediate Escalation",
+    detail: "Active financial fraud, corporate embezzlement, or identity theft requiring urgent field response.",
+    hotline: "+91 99999 99999",
+    color: "border-red-500/40 bg-red-500/5",
+    iconColor: "text-red-400",
+  },
+  {
+    icon: UserSearch,
+    title: "Missing Persons",
+    subtitle: "Priority Response",
+    detail: "Missing family member, absconding employee, or untraceable individual requiring immediate tracing.",
+    hotline: "+91 99999 99999",
+    color: "border-amber-500/40 bg-amber-500/5",
+    iconColor: "text-amber-400",
+  },
+  {
+    icon: AlertTriangle,
+    title: "Urgent Insurance Claims",
+    subtitle: "24-Hour Field Dispatch",
+    detail: "High-value or time-sensitive insurance claim investigations requiring rapid field verification.",
+    hotline: "+91 99999 99999",
+    color: "border-orange-500/40 bg-orange-500/5",
+    iconColor: "text-orange-400",
+  },
 ];
 
 const ConfidentialInquiry = () => {
@@ -22,7 +72,7 @@ const ConfidentialInquiry = () => {
     callbackTimezone: "India Time (IST)", callbackChannel: "Phone",
     description: "",
   });
-  
+
   // Dynamic Fields
   const [bulkCount, setBulkCount] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -71,7 +121,7 @@ const ConfidentialInquiry = () => {
       <Navbar />
       <main className="pt-32 pb-20">
         <div className="container mx-auto px-6">
-          <div className="mx-auto max-w-3xl">
+          <div className="mx-auto max-w-4xl">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-10 text-center">
               <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-primary mb-3">
                 <Lock className="h-4 w-4" /> End-to-End Encrypted Channel
@@ -80,10 +130,79 @@ const ConfidentialInquiry = () => {
                 Initiate Investigation Protocol
               </h1>
               <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
-                All communications are protected under strict enterprise NDA. 
+                All communications are protected under strict enterprise NDA.
                 Your identity and case details will remain completely confidential.
               </p>
             </motion.div>
+
+            {/* ─────────────────────────────────────────────────────────── */}
+            {/* EMERGENCY HOTLINE BLOCK */}
+            {/* ─────────────────────────────────────────────────────────── */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.05 }}
+              className="mb-10 border border-destructive/30 bg-destructive/5 p-6 sm:p-8"
+            >
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center bg-destructive/10">
+                    <PhoneCall className="h-5 w-5 text-destructive" />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-bold uppercase tracking-[0.2em] text-destructive">Emergency Hotline</span>
+                      <span className="inline-flex items-center gap-1 rounded-full bg-destructive/15 px-2 py-0.5 text-[10px] font-bold text-destructive">
+                        <Clock className="h-2.5 w-2.5" /> 24 / 7
+                      </span>
+                    </div>
+                    <h2 className="mt-0.5 font-heading text-lg font-bold text-foreground">
+                      For Fraud, Missing Persons &amp; Urgent Insurance Cases
+                    </h2>
+                  </div>
+                </div>
+                <a
+                  href="tel:+919999999999"
+                  className="inline-flex items-center gap-2 bg-destructive px-5 py-2.5 text-sm font-bold text-white transition-all hover:bg-destructive/90 shrink-0"
+                >
+                  <PhoneCall className="h-4 w-4" />
+                  Call Now: +91 99999 99999
+                </a>
+              </div>
+
+              <p className="text-sm text-muted-foreground mb-6">
+                If your case involves active fraud, a missing person, or a time-critical insurance claim,
+                call our dedicated emergency hotline immediately. Do not wait — every hour matters.
+              </p>
+
+              <div className="grid gap-4 sm:grid-cols-3">
+                {emergencyCategories.map((cat) => {
+                  const Icon = cat.icon;
+                  return (
+                    <div
+                      key={cat.title}
+                      className={`border p-4 ${cat.color}`}
+                    >
+                      <Icon className={`h-5 w-5 mb-3 ${cat.iconColor}`} />
+                      <div className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-0.5">{cat.subtitle}</div>
+                      <h3 className="font-heading text-sm font-bold text-foreground mb-2">{cat.title}</h3>
+                      <p className="text-xs leading-relaxed text-muted-foreground mb-3">{cat.detail}</p>
+                      <a
+                        href={`tel:${cat.hotline.replace(/\s/g, "")}`}
+                        className="inline-flex items-center gap-1.5 text-xs font-bold text-primary hover:underline"
+                      >
+                        <PhoneCall className="h-3 w-3" /> {cat.hotline}
+                      </a>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <p className="mt-4 text-center text-xs text-muted-foreground">
+                For non-urgent cases, use the secure inquiry form below. An investigator will respond within 24 hours.
+              </p>
+            </motion.div>
+            {/* ─────────────────────────────────────────────────────────── */}
 
             {submitted ? (
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="border border-primary/20 bg-primary/5 p-12 text-center shadow-lg">
@@ -95,19 +214,29 @@ const ConfidentialInquiry = () => {
               </motion.div>
             ) : (
               <motion.form initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} onSubmit={handleSubmit} className="space-y-6 bg-card border border-border p-8 shadow-2xl">
-                
+
                 {/* Dynamic Reassurance Banners */}
-                {form.type === "Matrimonial Verification" && (
+                {(form.type === "Pre-matrimonial Investigation" ||
+                  form.type === "Character Verification" ||
+                  form.type === "Hidden Marriage/Divorce Verification" ||
+                  form.type === "Lifestyle Verification") && (
                   <div className="bg-primary/10 border-l-4 border-primary p-4 mb-6">
                     <p className="text-sm text-foreground font-medium flex items-center gap-2">
                       <Lock className="h-4 w-4 text-primary" /> Matrimonial cases are handled with 100% absolute secrecy. The subject will never be alerted.
                     </p>
                   </div>
                 )}
-                {form.type === "Insurance Fraud" && (
+                {form.type === "Insurance Fraud Investigation" && (
                   <div className="bg-primary/10 border-l-4 border-primary p-4 mb-6">
                     <p className="text-sm text-foreground font-medium flex items-center gap-2">
                       <ShieldCheck className="h-4 w-4 text-primary" /> This case will be routed to our specialized Insurance Fraud field team for immediate action.
+                    </p>
+                  </div>
+                )}
+                {(form.type === "Missing Person Tracing" || form.type === "Fraud Investigation") && (
+                  <div className="bg-destructive/10 border-l-4 border-destructive p-4 mb-6">
+                    <p className="text-sm text-foreground font-medium flex items-center gap-2">
+                      <PhoneCall className="h-4 w-4 text-destructive" /> For urgent cases, call our emergency hotline directly: <a href="tel:+919999999999" className="font-bold text-destructive hover:underline">+91 99999 99999</a>
                     </p>
                   </div>
                 )}
@@ -150,7 +279,42 @@ const ConfidentialInquiry = () => {
                     <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-muted-foreground">Service Required *</label>
                     <select required value={form.type} onChange={(e) => setForm({ ...form, type: e.target.value })} className={inputClass}>
                       <option value="">Select Investigation Type</option>
-                      {investigationTypes.map((t) => <option key={t} value={t}>{t}</option>)}
+                      <optgroup label="Corporate Services">
+                        <option>Corporate BGV</option>
+                        <option>Vendor Verification</option>
+                        <option>Fraud Investigation</option>
+                        <option>Due Diligence</option>
+                        <option>Mystery Audit</option>
+                        <option>Asset Verification</option>
+                        <option>Workplace Misconduct</option>
+                        <option>Absconding Employee Trace</option>
+                        <option>Field Verification</option>
+                      </optgroup>
+                      <optgroup label="Matrimonial Services">
+                        <option>Pre-matrimonial Investigation</option>
+                        <option>Character Verification</option>
+                        <option>Employment Verification</option>
+                        <option>Family Background Verification</option>
+                        <option>Lifestyle Verification</option>
+                        <option>Social Media Investigation</option>
+                        <option>Financial Status Verification</option>
+                        <option>Hidden Marriage/Divorce Verification</option>
+                      </optgroup>
+                      <optgroup label="NRI Services">
+                        <option>India-Based Family Verification</option>
+                        <option>Property Verification</option>
+                        <option>Marriage Alliance Investigation</option>
+                        <option>Missing Person Tracing</option>
+                        <option>Tenant Verification</option>
+                        <option>Inheritance Dispute Investigation</option>
+                        <option>Local Field Enquiries</option>
+                      </optgroup>
+                      <optgroup label="Insurance">
+                        <option>Insurance Fraud Investigation</option>
+                      </optgroup>
+                      <optgroup label="Other">
+                        <option>Other</option>
+                      </optgroup>
                     </select>
                   </div>
                   <div>

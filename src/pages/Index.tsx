@@ -6,7 +6,8 @@ import WhyChooseUs from "@/components/home/WhyChooseUs";
 import CorporateClientSection from "@/components/home/CorporateClientSection";
 import HowItWorksSection from "@/components/home/HowItWorksSection";
 import IndustriesServed from "@/components/home/IndustriesServed";
-import PanIndiaMap from "@/components/home/PanIndiaMap";
+import TamilNaduMap from "@/components/home/TamilNaduMap";
+import AITechnologySection from "@/components/home/AITechnologySection";
 import SampleReportsSection from "@/components/home/SampleReportsSection";
 import CaseStudiesSection from "@/components/home/CaseStudiesSection";
 import CTASection from "@/components/home/CTASection";
@@ -25,7 +26,8 @@ const Index = () => {
         <CorporateClientSection />
         <HowItWorksSection />
         <IndustriesServed />
-        <PanIndiaMap />
+        <TamilNaduMap />
+        <AITechnologySection />
         <SampleReportsSection />
         <TestimonialsSection />
         <CaseStudiesSection />

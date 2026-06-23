@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, Facebook, Instagram, Linkedin, Twitter, MessageCircle } from "lucide-react";
 import gdssLogo from "@/assets/gdss-logo.png";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Footer = () => {
+  const { t } = useLanguage();
   const socialLinks = [
     { icon: Facebook, color: "#1877F2", label: "Facebook" },
     { icon: Instagram, color: "#E1306C", label: "Instagram" },
@@ -23,10 +25,9 @@ const Footer = () => {
       </div>
 
       <div className="container mx-auto px-6 py-16">
-        <div className="grid gap-12 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-          {/* Column 1 — Quick Links */}
+        <div className="grid gap-12 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">          {/* Column 1 — Quick Links */}
           <div className="space-y-6">
-            <h4 className="text-sm font-semibold uppercase tracking-[0.2em] text-[#cc0000]">Quick Links</h4>
+            <h4 className="text-sm font-semibold uppercase tracking-[0.25em] text-[#cc0000]">{t.quickLinks}</h4>
             <div className="flex flex-col gap-2.5">
               <Link to="/" className="text-sm text-background/60 hover:text-background transition-colors">Home</Link>
               <Link to="/services" className="text-sm text-background/60 hover:text-background transition-colors">Services</Link>
@@ -36,6 +37,7 @@ const Footer = () => {
               <Link to="/knowledge-center" className="text-sm text-background/60 hover:text-background transition-colors">Knowledge Center</Link>
               <Link to="/about" className="text-sm text-background/60 hover:text-background transition-colors">About Us</Link>
               <Link to="/contact" className="text-sm text-background/60 hover:text-background transition-colors">Contact</Link>
+              <Link to="/sitemap" className="text-sm text-background/60 hover:text-background transition-colors">Sitemap</Link>
             </div>
           </div>
 
@@ -53,7 +55,7 @@ const Footer = () => {
 
           {/* Column 3 — Contact */}
           <div className="space-y-6">
-            <h4 className="text-sm font-semibold uppercase tracking-[0.2em] text-[#cc0000]">Contact</h4>
+            <h4 className="text-sm font-semibold uppercase tracking-[0.25em] text-[#cc0000]">{t.contactUs}</h4>
             <div className="flex flex-col gap-4">
               <a href="tel:+919999999999" className="flex items-center gap-3 text-sm text-background/60 hover:text-background transition-colors">
                 <Phone className="h-4 w-4 shrink-0" /> +91 99999 99999
@@ -69,12 +71,12 @@ const Footer = () => {
 
           {/* Column 4 — Certifications & Security */}
           <div className="space-y-6">
-            <h4 className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">Trust & Compliance</h4>
+            <h4 className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">{t.trustCompliance}</h4>
             <div className="space-y-4">
               <div className="border border-background/10 p-4">
-                <p className="text-xs font-bold text-background uppercase tracking-wider">Experience</p>
-                <p className="text-lg font-bold text-primary mt-1">30+ Years</p>
-                <p className="text-[10px] text-background/40 mt-1 leading-relaxed">
+                <p className="text-xs font-bold text-white uppercase tracking-wider">Experience</p>
+                <p className="text-lg font-bold text-white mt-1">30+ Years</p>
+                <p className="text-[10px] text-white/90 mt-1 leading-relaxed">
                   Professional investigation and corporate intelligence services since 1993.
                 </p>
               </div>
@@ -84,7 +86,7 @@ const Footer = () => {
                 <span className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-green-500"></div> Encrypted Communication</span>
               </div>
               <a href="/gdss-corporate-profile.pdf" download className="inline-flex items-center gap-2 text-sm text-primary hover:text-primary-foreground hover:bg-primary border border-primary px-4 py-2 mt-2 transition-colors">
-                Download Corporate Profile
+                {t.downloadProfile}
               </a>
             </div>
           </div>

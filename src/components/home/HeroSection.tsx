@@ -2,8 +2,10 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, ShieldCheck, MapPin, Clock, CheckCircle } from "lucide-react";
 import heroCorporate from "@/assets/image copy 23.png";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const HeroSection = () => {
+  const { t } = useLanguage();
   return (
     <section className="relative min-h-[90vh] flex flex-col justify-center overflow-hidden bg-background pt-24 pb-12">
       {/* Background intelligence-agency aesthetic */}
@@ -26,16 +28,15 @@ const HeroSection = () => {
           >
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 border border-primary/20 text-primary text-xs font-semibold uppercase tracking-widest mb-8">
               <ShieldCheck className="h-4 w-4" />
-              Corporate Security & Intelligence
+              {t.heroTag}
             </div>
 
             <h1 className="text-4xl font-heading font-bold leading-[1.1] tracking-tight text-foreground sm:text-5xl lg:text-6xl mb-6">
-              Confidential Investigation & <span className="text-primary">Verification Services</span>
+              {t.heroTitle} <span className="text-primary">{t.heroTitleHighlight}</span>
             </h1>
 
             <p className="max-w-lg text-lg leading-relaxed text-muted-foreground mb-10">
-              Professional investigations backed by over 30 years of experience.
-              Protecting organizations and individuals with discreet, evidence-based intelligence operations across India.
+              {t.heroDesc}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-12">
@@ -43,27 +44,27 @@ const HeroSection = () => {
                 to="/inquiry"
                 className="inline-flex justify-center items-center gap-2 bg-primary text-primary-foreground px-8 py-4 text-sm font-semibold hover:bg-primary/90 transition-colors shadow-lg"
               >
-                Request Discreet Verification
+                {t.heroCTA1}
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <a
                 href="tel:+919999999999"
                 className="inline-flex justify-center items-center gap-2 border border-primary text-primary px-8 py-4 text-sm font-semibold hover:bg-primary/5 transition-colors"
               >
-                Speak Confidentially With an Investigator
+                {t.heroCTA2}
               </a>
             </div>
 
             {/* Compliance Badges */}
             <div className="flex flex-wrap items-center gap-6 pt-6 border-t border-border">
               <div className="flex items-center gap-2 text-xs font-bold text-muted-foreground uppercase tracking-wider">
-                <CheckCircle className="h-4 w-4 text-primary" /> Corporate NDA Supported
+                <CheckCircle className="h-4 w-4 text-primary" /> {t.badge1}
               </div>
               <div className="flex items-center gap-2 text-xs font-bold text-muted-foreground uppercase tracking-wider">
-                <CheckCircle className="h-4 w-4 text-primary" /> GST Registered
+                <CheckCircle className="h-4 w-4 text-primary" /> {t.badge2}
               </div>
               <div className="flex items-center gap-2 text-xs font-bold text-muted-foreground uppercase tracking-wider">
-                <CheckCircle className="h-4 w-4 text-primary" /> MSME Certified
+                <CheckCircle className="h-4 w-4 text-primary" /> {t.badge3}
               </div>
             </div>
           </motion.div>
@@ -85,13 +86,13 @@ const HeroSection = () => {
               
               {/* Floating Stat Cards inside image container */}
               <div className="absolute bottom-6 left-6 right-6 grid grid-cols-2 gap-4">
-                <div className="bg-background/95 backdrop-blur-md border border-border p-4 shadow-lg">
-                  <div className="text-2xl font-bold text-primary mb-1">10,000+</div>
-                  <div className="text-xs uppercase tracking-wider text-muted-foreground">Verifications Completed</div>
+                <div className="bg-background/95 backdrop-blur-md border border-primary/30 p-4 shadow-lg">
+                  <div className="text-2xl font-bold text-primary mb-1">{t.stat1Value}</div>
+                  <div className="text-xs uppercase tracking-wider text-muted-foreground">{t.stat1Label}</div>
                 </div>
                 <div className="bg-background/95 backdrop-blur-md border border-border p-4 shadow-lg">
-                  <div className="text-2xl font-bold text-primary mb-1">30+ Years</div>
-                  <div className="text-xs uppercase tracking-wider text-muted-foreground">Industry Experience</div>
+                  <div className="text-2xl font-bold text-primary mb-1">{t.stat2Value}</div>
+                  <div className="text-xs uppercase tracking-wider text-muted-foreground">{t.stat2Label}</div>
                 </div>
               </div>
             </div>
@@ -104,19 +105,19 @@ const HeroSection = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 border-y border-border divide-x divide-border">
           <div className="py-6 px-4 flex flex-col items-center text-center justify-center gap-2 bg-subtle/50">
             <MapPin className="h-5 w-5 text-primary" />
-            <span className="text-xs font-bold uppercase tracking-wider text-foreground">PAN India Operations</span>
+            <span className="text-xs font-bold uppercase tracking-wider text-foreground">{t.trustPanIndia}</span>
           </div>
           <div className="py-6 px-4 flex flex-col items-center text-center justify-center gap-2 bg-subtle/50">
             <Clock className="h-5 w-5 text-primary" />
-            <span className="text-xs font-bold uppercase tracking-wider text-foreground">24-Hour Response</span>
+            <span className="text-xs font-bold uppercase tracking-wider text-foreground">{t.trust24hr}</span>
           </div>
           <div className="py-6 px-4 flex flex-col items-center text-center justify-center gap-2 bg-subtle/50">
             <ShieldCheck className="h-5 w-5 text-primary" />
-            <span className="text-xs font-bold uppercase tracking-wider text-foreground">Evidence-Based</span>
+            <span className="text-xs font-bold uppercase tracking-wider text-foreground">{t.trustEvidence}</span>
           </div>
           <div className="py-6 px-4 flex flex-col items-center text-center justify-center gap-2 bg-subtle/50">
             <CheckCircle className="h-5 w-5 text-primary" />
-            <span className="text-xs font-bold uppercase tracking-wider text-foreground">Legally Compliant</span>
+            <span className="text-xs font-bold uppercase tracking-wider text-foreground">{t.trustLegal}</span>
           </div>
         </div>
       </div>

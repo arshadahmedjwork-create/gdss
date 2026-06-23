@@ -119,12 +119,12 @@ const Consultation = () => {
                   <div className="space-y-2">
                     <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Time Slot *</label>
                     <select required value={form.timeSlot} onChange={e => setForm({...form, timeSlot: e.target.value})} className={inputClass}>
-                      <option value="">Select time</option>
-                      <option>09:00 - 11:00</option>
-                      <option>11:00 - 13:00</option>
-                      <option>14:00 - 16:00</option>
-                      <option>16:00 - 18:00</option>
-                      <option>18:00 - 20:00</option>
+                      <option value="" disabled>-- Select a slot --</option>
+                      <option value="09:00 - 11:00">09:00 - 11:00</option>
+                      <option value="11:00 - 13:00">11:00 - 13:00</option>
+                      <option value="14:00 - 16:00">14:00 - 16:00</option>
+                      <option value="16:00 - 18:00">16:00 - 18:00</option>
+                      <option value="18:00 - 20:00">18:00 - 20:00</option>
                     </select>
                   </div>
                   <div className="space-y-2">
